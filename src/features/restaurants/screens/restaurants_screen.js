@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  StatusBar,
-} from "react-native";
+import { SafeAreaView, Platform, StatusBar } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { RestaurantInfo } from "../componets/restaurant-info-card";
 import styled from "styled-components";
@@ -42,9 +35,3 @@ export const RestaurantsScreen = () => {
     </SafeArea>
   );
 };
-
-const styles = StyleSheet.create({
-  container: { flex: 1, marginTop: isAndroid ? StatusBar.currentHeight : 0 },
-  insiderView: { padding: 16 },
-  listView: { flex: 1, padding: 16, backgroundColor: "blue" },
-});
