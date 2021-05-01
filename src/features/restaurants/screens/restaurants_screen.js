@@ -1,27 +1,26 @@
 import React from "react";
-import { SafeAreaView, Platform, StatusBar } from "react-native";
+import { SafeAreaView, FlatList, StatusBar } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { RestaurantInfo } from "../componets/restaurant-info-card";
 import styled from "styled-components";
-
-const isAndroid = Platform.OS === "android";
-
-const SafeArea = styled(SafeAreaView)`
-  flex: 1;
-  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
-`;
+import { SafeArea } from "../../../components/utility/safe-area";
+import { useContext } from "react";
+import { RestaurantsContext } from "../../../services/restaurants/restaurant.context";
+import { Spacer } from "../../../components/spacer_component";
+import { RestaurantCard } from "../componets/restaurant-info-card-style";
 
 const SearchContainer = styled.View`
   padding: ${(props) => props.theme.space[3]};
 `;
 
-const RestaurantListContainer = styled.View`
-  flex: 1;
-  padding: ${(props) => props.theme.space[3]};
-  background-color: blue;
-`;
+const RestaurantList = styled(FlatList).attrs({
+  contentContainerStyle: {
+    padding: 16,
+  },
+})``;
 
 export const RestaurantsScreen = () => {
+  const { isLoading, error, restaurants } = useContext(RestaurantsContext);
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
   return (
@@ -29,9 +28,17 @@ export const RestaurantsScreen = () => {
       <SearchContainer>
         <Searchbar />
       </SearchContainer>
-      <RestaurantListContainer>
-        <RestaurantInfo />
-      </RestaurantListContainer>
+      <RestaurantList
+        data={restaurants}
+        keyExtractor={(item) => item.name}
+        renderItem={({ item }) => {
+          return (
+            <Spacer position="bottom" size="large">
+              <RestaurantInfo restaurant={item} />
+            </Spacer>
+          );
+        }}
+      />
     </SafeArea>
   );
 };
