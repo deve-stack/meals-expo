@@ -7,11 +7,7 @@ import { SafeArea } from "../../../components/utility/safe-area";
 import { useContext } from "react";
 import { RestaurantsContext } from "../../../services/restaurants/restaurant.context";
 import { Spacer } from "../../../components/spacer_component";
-import { RestaurantCard } from "../componets/restaurant-info-card-style";
-
-const SearchContainer = styled.View`
-  padding: ${(props) => props.theme.space[3]};
-`;
+import { Search } from "../componets/search.component";
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
@@ -44,9 +40,10 @@ export const RestaurantsScreen = () => {
           />
         </LoadingContainer>
       )}
-      <SearchContainer>
+      <Search />
+      {/* <SearchContainer>
         <Searchbar />
-      </SearchContainer>
+      </SearchContainer> */}
       <RestaurantList
         data={restaurants}
         keyExtractor={(item) => item.name}
