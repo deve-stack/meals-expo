@@ -41,9 +41,6 @@ export const RestaurantsScreen = () => {
         </LoadingContainer>
       )}
       <Search />
-      {/* <SearchContainer>
-        <Searchbar />
-      </SearchContainer> */}
       <RestaurantList
         data={restaurants}
         keyExtractor={(item) => item.name}

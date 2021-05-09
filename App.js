@@ -8,17 +8,10 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./src/infrastructure/theme";
 import { Ionicons } from "@expo/vector-icons";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { RestaurantsScreen } from "./src/features/restaurants/screens/restaurants_screen";
 import { Text } from "react-native";
-import {
-  RestaurantsContext,
-  RestaurantsContextProvider,
-} from "./src/services/restaurants/restaurant.context";
+import { RestaurantsContextProvider } from "./src/services/restaurants/restaurant.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
-// import { LocationContextProvider } from "./src/services/location/location.context";
+import { Navigation } from "./src/infrastructure/navigation";
 
 const SettingsScreen = () => <Text>Settings</Text>;
 const MapsScreen = () => <Text>MapsScreen</Text>;
@@ -50,27 +43,12 @@ export default function App() {
   if (!oswaldLoaded || !latoLoaded) {
     return null;
   }
-
-  const Tab = createBottomTabNavigator();
-
   return (
     <>
       <ThemeProvider theme={theme}>
         <LocationContextProvider>
           <RestaurantsContextProvider>
-            <NavigationContainer>
-              <Tab.Navigator
-                screenOptions={createScreenOptions}
-                tabBarOptions={{
-                  activeTintColor: "tomato",
-                  inactiveTintColor: "gray",
-                }}
-              >
-                <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-                <Tab.Screen name="Maps" component={MapsScreen} />
-                <Tab.Screen name="Settings" component={SettingsScreen} />
-              </Tab.Navigator>
-            </NavigationContainer>
+            <Navigation />
           </RestaurantsContextProvider>
         </LocationContextProvider>
         <ExpoStatusBar style="auto" />
