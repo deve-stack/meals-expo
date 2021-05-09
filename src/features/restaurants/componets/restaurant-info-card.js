@@ -23,20 +23,11 @@ export const RestaurantInfo = ({ restaurant }) => {
     address,
     isOpenNow,
     rating,
+    placeId,
     isClosedTemporarily,
   } = restaurant;
-  // const name = "Some Restaurant";
-  // //   icon,
-  // const photos = [
-  //   "https://tastesbetterfromscratch.com/wp-content/uploads/2020/06/Hamburger-recipe-7-500x500.jpg",
-  // ];
-  // const address = "100 some random address";
-  // const isOpenNow = true;
-  // const rating = 4;
-  // const isClosedTemporarily = true;
-  // } = restaurant;
 
-  const rattingArray = Array.from(new Array(Math.floor(rating)));
+  const ratingArray = Array.from(new Array(Math.floor(rating)));
 
   return (
     <RestaurantCard elevation={5}>
@@ -45,8 +36,13 @@ export const RestaurantInfo = ({ restaurant }) => {
         <Text variant="label">{name}</Text>
         <Section>
           <Rating>
-            {rattingArray.map(() => (
-              <SvgXml xml={star} width={20} height={20} />
+            {ratingArray.map((_, i) => (
+              <SvgXml
+                key={`star-${placeId}-${i}`}
+                xml={star}
+                width={20}
+                height={20}
+              />
             ))}
           </Rating>
           <SectionEnd>
