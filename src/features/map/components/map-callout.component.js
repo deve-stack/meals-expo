@@ -4,5 +4,5 @@ import { CompactRestaurantInfo } from "./restaurant/compact-restaurant-info.comp
 
 const MyText = styled.Text``;
 export const MapCallout = ({ restaurant }) => (
-  <CompactRestaurantInfo restaurant={restaurant} />
+  <CompactRestaurantInfo isMap restaurant={restaurant} />
 );

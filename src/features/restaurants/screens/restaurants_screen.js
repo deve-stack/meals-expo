@@ -8,6 +8,9 @@ import { useContext } from "react";
 import { RestaurantsContext } from "../../../services/restaurants/restaurant.context";
 import { Spacer } from "../../../components/spacer_component";
 import { Search } from "../componets/search.component";
+import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
+import { useState } from "react/cjs/react.development";
+import { FavouritesContext } from "../../../services/favourites/favourites.context";
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
@@ -27,6 +30,8 @@ export const RestaurantsScreen = ({ navigation }) => {
   const { isLoading, restaurants } = useContext(RestaurantsContext);
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
+  const { favourites } = useContext(FavouritesContext);
+  const [isToggled, setIsToggled] = useState(false);
 
   return (
     <SafeArea>
@@ -40,7 +45,16 @@ export const RestaurantsScreen = ({ navigation }) => {
           />
         </LoadingContainer>
       )}
-      <Search />
+      <Search
+        isFavouritesToggled={isToggled}
+        onFavouritesToggle={() => setIsToggled(!isToggled)}
+      />
+      {isToggled && (
+        <FavouritesBar
+          favourites={favourites}
+          onNavigate={navigation.navigate}
+        />
+      )}
       <RestaurantList
         data={restaurants}
         keyExtractor={(item) => item.name}
