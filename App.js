@@ -33,7 +33,9 @@ export default function App() {
     measurementId: "G-H9K2QZ2VVM",
   };
 
-  firebase.initializeApp(firebaseConfig);
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
 
   if (!oswaldLoaded || !latoLoaded) {
     return null;
