@@ -13,6 +13,7 @@ import { useState } from "react/cjs/react.development";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { RestaurantList } from "../componets/restaurant-list.styles";
 import { FadeInView } from "../../../components/animations/fade.animation";
+import { RestaurantCard } from "../componets/restaurant-info-card-style";
 
 const Loading = styled(ActivityIndicator)``;
 
@@ -65,7 +66,7 @@ export const RestaurantsScreen = ({ navigation }) => {
             >
               <Spacer position="bottom" size="large">
                 <FadeInView>
-                  <RestaurantInfoCard restaurant={item} />
+                  <RestaurantInfo restaurant={item} />
                 </FadeInView>
               </Spacer>
             </TouchableOpacity>

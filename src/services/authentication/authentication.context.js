@@ -2,6 +2,8 @@ import React, { useState, createContext } from "react";
 
 import { loginRequest } from "./authentication.service";
 
+import * as firebase from "firebase";
+
 export const AuthenticationContext = createContext();
 
 export const AuthenticationContextProvider = ({ children }) => {
